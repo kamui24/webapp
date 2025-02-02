@@ -14,9 +14,9 @@ pipeline {
         }
         stage ('Git Secrets check') {
             steps {
-                sh 'rm trufflehog || true'
-                sh 'docker run trufflesecurity/trufflehog:3.88.4 git https://github.com/kamui24/webapp.git -j > trufflehog'
-                sh 'cat trufflehog'
+                sh 'rm /etc/sec-results/trufflehog || true'
+                sh 'docker run trufflesecurity/trufflehog:3.88.4 git https://github.com/kamui24/webapp.git -j > /etc/sec-results/trufflehog'
+                sh 'cat /etc/sec-results/trufflehog'
             }
         }
         stage ('Build') {
