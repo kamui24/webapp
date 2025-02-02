@@ -1,8 +1,7 @@
 pipeline {
     agent any
-    environment {
-        MAVEN_HOME = tool 'Maven'  // Получаем путь к Maven
-        PATH = "${MAVEN_HOME}/bin:${env.PATH}"  // Добавляем Maven в PATH
+    tools {
+        Maven 'Maven'
     }
     stages {
         stage ('Initialize') {
