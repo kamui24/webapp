@@ -22,7 +22,7 @@ pipeline {
         stage ('Git Secrets Check') {
             steps {
                 sh 'rm /etc/sec-results/trufflehog-secrets || true'
-                sh 'docker run cincan/trufflehog:latest https://github.com/kamui24/webapp.git --json'
+                sh 'docker run cincan/trufflehog:latest https://github.com/kamui24/webapp.git --json > /etc/sec-results/trufflehog-secrets'
             }
         }
         stage ('Build') {
