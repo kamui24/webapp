@@ -12,6 +12,13 @@ pipeline {
                 '''
             }
         }
+        stage ('Git Secrets check') {
+            steps {
+                sh 'rm trufflehog || true'
+                sh 'docker run trufflesecurity/trufflehog:3.88.4 git https://github.com/kamui24/webapp.git -j > trufflehog'
+                sh 'cat trufflehog'
+            }
+        }
         stage ('Build') {
             steps {
                 sh 'mvn clean package'
