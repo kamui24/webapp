@@ -40,7 +40,7 @@ pipeline {
         stage ('SAST - Static Application Security Testing') {
             steps {
                 withSonarQubeEnv('SonarQube') {
-                    sh 'mvn SonarQube:SonarQube'
+                    sh 'mvn sonar:sonar'
                     sh 'cat target/sonar/report-task.txt'
                 }
             }
