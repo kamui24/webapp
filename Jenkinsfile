@@ -37,6 +37,14 @@ pipeline {
                 sh 'cat odc-reports/dependency-check-report.json'
             }
         }
+        stage ('SAST - Static Application Security Testing') {
+            steps {
+                withSonarQubeEnv('SonarQube') {
+                    sh 'mvn SonarQube:SonarQube'
+                    sh 'cat target/sonar/report-task.txt'
+                }
+            }
+        }
         stage ('Build') {
             steps {
                 sh 'mvn clean package'
