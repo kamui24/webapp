@@ -28,11 +28,13 @@ pipeline {
         }
         stage ('SCA - Software Composition Analysis') {
             steps {
+                sh 'rm -rf odc-reports || true'
                 sh 'mkdir odc-reports'
                 sh 'rm owasp* || true'
                 sh 'wget https://raw.githubusercontent.com/kamui24/webapp/refs/heads/master/owasp-dependency-check.sh'
                 sh 'chmod +x owasp-dependency-check.sh'
                 sh 'bash owasp-dependency-check.sh'
+                sh 'cat odc-reports/dependency-check-report.json'
             }
         }
         stage ('Build') {
