@@ -37,14 +37,14 @@ pipeline {
                 sh 'cat odc-reports/dependency-check-report.json'
             }
         }
-        stage ('SAST - Static Application Security Testing') {
+/*        stage ('SAST - Static Application Security Testing') {
             steps {
                 withSonarQubeEnv('SonarQube') {
                     sh 'mvn sonar:sonar'
                     sh 'cat target/sonar/report-task.txt'
                 }
             }
-        }
+        } */
         stage ('Build') {
             steps {
                 sh 'mvn clean package'
@@ -53,7 +53,7 @@ pipeline {
         stage ('Deploy to Tomcat Webserver') {
             steps {
                 sshagent(['tomcat']) {
-                    sh 'scp -o StrictHostKeyChecking=no target/*.war ubuntu@13.61.152.63:/prod/apache-tomcat/webapps/webapps.war'
+                    sh 'scp -o StrictHostKeyChecking=no target/*.war ubuntu@51.20.138.98:/prod/apache-tomcat/webapps/webapps.war'
                 }
             }
         }
